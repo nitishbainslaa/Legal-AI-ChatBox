@@ -56,7 +56,7 @@ How may I help you?`
 
 
 // ======================
-// POPUP AFTER 2 MIN
+// POPUP AFTER 3 MIN
 // ======================
 
 window.addEventListener(
