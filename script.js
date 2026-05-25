@@ -39,7 +39,7 @@ else{
 
 appendAI(
 
-`Hello 👋<br><br>
+`Hello 👋
 
 I am AK Tiwari And Associates Legal AI Chat Box.
 
