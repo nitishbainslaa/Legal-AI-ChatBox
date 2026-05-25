@@ -39,7 +39,11 @@ else{
 
 appendAI(
 
-`Hello 👋 I am AK Tiwari And Associates Legal AI Chat Box. <br><br>How may I help you?`
+`Hello 👋<br><br>
+
+I am AK Tiwari And Associates Legal AI Chat Box. 
+
+How may I help you?`
 
 );
 
