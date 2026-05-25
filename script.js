@@ -41,7 +41,7 @@ appendAI(
 
 `Hello 👋<br><br>
 
-I am AK Tiwari And Associates Legal AI Chat Box. 
+AK Tiwari And Associates Legal AI Chat Box. 
 
 How may I help you?`
 
