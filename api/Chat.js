@@ -1,106 +1,37 @@
-require(
-"dotenv"
-)
-.config();
+const Groq = require("groq-sdk");
 
-
-const express =
-require(
-"express"
-);
-
-const cors =
-require(
-"cors"
-);
-
-const Groq =
-require(
-"groq-sdk"
-);
-
-
-
-const app =
-express();
-
-
-
-app.use(
-
-cors()
-
-);
-
-
-app.use(
-
-express.json()
-
-);
-
-
-
-const groq =
-
-new Groq({
-
-apiKey:
-
-process.env
-
-.GROQ_API_KEY
-
+const groq = new Groq({
+  apiKey: process.env.GROQ_API_KEY,
 });
 
+module.exports = async (req, res) => {
 
+  if (req.method !== "POST") {
+    return res.status(405).json({
+      error: "Method not allowed"
+    });
+  }
 
+  try {
 
+    const userMessage = req.body.message;
 
+    if (!userMessage) {
+      return res.status(400).json({
+        error: "Message required"
+      });
+    }
 
-app.post(
+    const completion =
+      await groq.chat.completions.create({
 
-"/chat",
+        messages: [
 
-async(
+          {
 
-req,
-res
+            role: "system",
 
-)=>{
-
-
-try{
-
-
-let userMessage =
-
-req.body.message;
-
-
-
-
-
-let completion =
-
-await groq
-.chat
-.completions
-.create({
-
-messages:[
-
-
-{
-
-role:
-
-"system",
-
-
-content:
-
-`
+            content: `
 
 You are Legal AI India.
 
@@ -122,11 +53,7 @@ STRICT RULES:
 
 4. Use:
 
-Heading
-+
-Bullets
-
-ONLY
+Heading + Bullets ONLY
 
 5. Mention:
 - Relevant Acts
@@ -151,7 +78,6 @@ when necessary.
 
 9. Format example:
 
-
 💔 Divorce
 
 • Divorce in India may be:
@@ -159,11 +85,9 @@ when necessary.
 - Mutual consent
 - Contested divorce
 
-
 Applicable laws:
 
 - Hindu Marriage Act, 1955
-
 
 Process:
 
@@ -171,7 +95,6 @@ Process:
 2. Court hearing
 3. Waiting period
 4. Final decree
-
 
 Typical duration:
 
@@ -194,119 +117,54 @@ Never answer:
 
 `
 
-},
+          },
 
+          {
 
+            role: "user",
 
-{
+            content: userMessage
 
-role:
+          }
 
-"user",
+        ],
 
-content:
+        model:
+          "llama-3.3-70b-versatile",
 
-userMessage
+        temperature:
+          0.5,
 
-}
+        max_tokens:
+          600
 
+      });
 
-],
 
+    return res.status(200).json({
 
+      reply:
 
-model:
+        completion
+          .choices[0]
+          .message
+          .content
 
-"llama-3.3-70b-versatile",
+    });
 
+  }
 
+  catch (err) {
 
-temperature:
+    console.error(err);
 
-0.5,
+    return res.status(500).json({
 
+      error:
+        "AI unavailable"
 
-max_tokens:
+    });
 
-600
+  }
 
-
-});
-
-
-
-
-
-res.json({
-
-
-reply:
-
-completion
-
-.choices[0]
-
-.message
-
-.content
-
-
-});
-
-
-
-}
-catch(err){
-
-
-console.log(
-
-err
-
-);
-
-
-res.status(
-500
-)
-
-.json({
-
-error:
-
-"AI unavailable"
-
-});
-
-
-}
-
-
-});
-
-
-
-
-
-
-app.listen(
-
-3000,
-
-()=>{
-
-
-console.log(
-
-`
-
-Server Running:
-
-http://localhost:3000
-
-`
-
-);
-
-
-});
+};

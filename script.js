@@ -39,15 +39,11 @@ else{
 
 appendAI(
 
-`
+`Hello 👋<br><br>
 
-Hello 👋<br><br>
+I am AK Tiwari And Associates Legal AI Chat Box.<br><br>
 
-I am AK Tiwari And Associates Legal AI Chat Box.
-
-How may I help you?
-
-`
+How may I help you?`
 
 );
 
@@ -154,7 +150,7 @@ let response=
 
 await fetch(
 
-"http://localhost:3000/chat",
+"/api/chat",
 
 {
 
