@@ -372,7 +372,7 @@ try{
 
 await fetch(
 
-"https://script.google.com/macros/s/AKfycbzwuEKK-tuwy1KSMDL9H63qKuZT1OmlRFtCNqnNIrSxATnNNtAlqC5JrAP4wFVo4_mSrQ/exec",
+"https://script.google.com/macros/s/AKfycbxY94PtzZ8uWTvO-Hrd9pASGW0dmHMwGlITLwRVcEv9RMnHZ-TKuLabfgIapUmF0LaQvg/exec",
 
 {
 
