@@ -179,7 +179,9 @@ After examining whether both parties have given free consent and fulfilled the l
 
 • Documents: Marriage Certificate, Identity Proof, Settlement Agreement
 
-• Typical Duration: Usually 6–18 months`
+• Typical Duration: Usually 6–18 months
+
+`
 
           },
 
