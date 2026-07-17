@@ -1319,3 +1319,470 @@ color:#64748b;
 text-align:center;
 
 }
+/* ==========================================
+   RESPONSIVE DESIGN
+========================================== */
+
+@media (max-width:1400px){
+
+.rightPanel{
+display:none;
+}
+
+.sidebar{
+width:260px;
+}
+
+}
+
+@media (max-width:1100px){
+
+.sidebar{
+display:none;
+}
+
+.app{
+width:98%;
+height:96vh;
+}
+
+.main{
+width:100%;
+}
+
+}
+
+@media (max-width:768px){
+
+body{
+padding:10px;
+}
+
+.app{
+width:100%;
+height:100vh;
+border-radius:0;
+}
+
+.topbar{
+
+height:auto;
+
+padding:15px;
+
+flex-wrap:wrap;
+
+gap:15px;
+
+}
+
+.topLeft h2{
+font-size:18px;
+}
+
+.welcomeCard{
+
+padding:20px;
+
+flex-direction:column;
+
+align-items:flex-start;
+
+gap:15px;
+
+}
+
+.scale{
+
+display:none;
+
+}
+
+.robot{
+
+width:60px;
+
+height:60px;
+
+font-size:28px;
+
+}
+
+#chat{
+
+padding:15px;
+
+}
+
+.ai,
+.user{
+
+max-width:95%;
+
+font-size:14px;
+
+}
+
+.bottomSection{
+
+padding:10px;
+
+}
+
+.inputBox{
+
+padding:12px;
+
+gap:10px;
+
+}
+
+#msg{
+
+font-size:15px;
+
+}
+
+.voiceBtn,
+.sendBtn{
+
+width:50px;
+
+height:50px;
+
+}
+
+.login-card{
+
+width:95%;
+
+padding:30px;
+
+}
+
+}
+
+/* ==========================================
+SCROLLBAR
+========================================== */
+
+::-webkit-scrollbar{
+
+width:8px;
+
+height:8px;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+background:#cbd5e1;
+
+border-radius:50px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+background:#94a3b8;
+
+}
+
+::-webkit-scrollbar-track{
+
+background:transparent;
+
+}
+
+/* ==========================================
+ONLINE PULSE
+========================================== */
+
+.greenDot{
+
+animation:pulse 1.8s infinite;
+
+}
+
+@keyframes pulse{
+
+0%{
+
+box-shadow:0 0 0 0 rgba(34,197,94,.6);
+
+}
+
+70%{
+
+box-shadow:0 0 0 12px rgba(34,197,94,0);
+
+}
+
+100%{
+
+box-shadow:0 0 0 0 rgba(34,197,94,0);
+
+}
+
+}
+
+/* ==========================================
+BUTTON RIPPLE
+========================================== */
+
+.sendBtn,
+.voiceBtn,
+.newChat,
+.loginBtn{
+
+position:relative;
+
+overflow:hidden;
+
+}
+
+.sendBtn::after,
+.voiceBtn::after,
+.loginBtn::after{
+
+content:"";
+
+position:absolute;
+
+width:0;
+
+height:0;
+
+border-radius:50%;
+
+background:rgba(255,255,255,.4);
+
+top:50%;
+
+left:50%;
+
+transform:translate(-50%,-50%);
+
+transition:.5s;
+
+}
+
+.sendBtn:active::after,
+.voiceBtn:active::after,
+.loginBtn:active::after{
+
+width:180px;
+
+height:180px;
+
+}
+
+/* ==========================================
+GLASS HOVER
+========================================== */
+
+.infoCard,
+.questionsCard,
+.sideCard,
+.welcomeCard{
+
+transition:.35s;
+
+}
+
+.infoCard:hover,
+.questionsCard:hover,
+.sideCard:hover,
+.welcomeCard:hover{
+
+transform:translateY(-5px);
+
+box-shadow:0 20px 45px rgba(37,99,235,.15);
+
+}
+
+/* ==========================================
+CHAT ANIMATION
+========================================== */
+
+.ai{
+
+animation:slideLeft .3s ease;
+
+}
+
+.user{
+
+animation:slideRight .3s ease;
+
+}
+
+@keyframes slideLeft{
+
+from{
+
+opacity:0;
+
+transform:translateX(-30px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateX(0);
+
+}
+
+}
+
+@keyframes slideRight{
+
+from{
+
+opacity:0;
+
+transform:translateX(30px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateX(0);
+
+}
+
+}
+
+/* ==========================================
+INPUT FOCUS
+========================================== */
+
+.inputBox{
+
+transition:.3s;
+
+}
+
+.inputBox:focus-within{
+
+box-shadow:
+
+0 0 0 4px rgba(37,99,235,.15),
+
+0 20px 40px rgba(37,99,235,.12);
+
+}
+
+/* ==========================================
+PLACEHOLDER
+========================================== */
+
+::placeholder{
+
+color:#94a3b8;
+
+}
+
+/* ==========================================
+SELECTION
+========================================== */
+
+::selection{
+
+background:#2563eb;
+
+color:white;
+
+}
+
+/* ==========================================
+SMOOTH TRANSITIONS
+========================================== */
+
+*{
+
+transition:
+
+background .25s,
+
+color .25s,
+
+border-color .25s,
+
+box-shadow .25s,
+
+transform .25s;
+
+}
+
+/* ==========================================
+FLOATING BACKGROUND
+========================================== */
+
+.blur1{
+
+animation:float1 12s infinite alternate ease-in-out;
+
+}
+
+.blur2{
+
+animation:float2 15s infinite alternate ease-in-out;
+
+}
+
+@keyframes float1{
+
+from{
+
+transform:translate(0,0);
+
+}
+
+to{
+
+transform:translate(50px,40px);
+
+}
+
+}
+
+@keyframes float2{
+
+from{
+
+transform:translate(0,0);
+
+}
+
+to{
+
+transform:translate(-40px,-50px);
+
+}
+
+}
+
+/* ==========================================
+FOOTER
+========================================== */
+
+.footer{
+
+margin-top:15px;
+
+text-align:center;
+
+font-size:13px;
+
+color:#94a3b8;
+
+}
+
+/* ==========================================
+END
+========================================== */
