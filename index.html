@@ -1,283 +1,446 @@
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<meta charset="UTF-8">
+    <title>AK Tiwari & Associates | AI Legal Assistant</title>
 
-<meta
-name="viewport"
-content="width=device-width, initial-scale=1.0">
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
 
-<title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
-AK Tiwari and Associates
+    <!-- Markdown -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
-</title>
-
-
-
-<link
-rel="stylesheet"
-href="style.css">
-
-
-<script
-src="https://cdn.jsdelivr.net/npm/marked/marked.min.js">
-
-</script>
-
-
+    <link rel="stylesheet" href="style.css">
 </head>
-
-
-
 
 <body>
 
+    <div class="app">
 
+        <!-- ========================= -->
+        <!-- LEFT SIDEBAR -->
+        <!-- ========================= -->
 
+        <aside class="sidebar">
 
-<div class="phone">
+            <div>
 
+                <div class="logoBox">
 
+                    <img src="Screenshot_3.png" class="logo">
 
-<!-- HEADER -->
+                    <div>
 
+                        <h2>AK Tiwari & Associates</h2>
 
-<div class="header">
+                        <span>AI Legal Assistant</span>
 
+                    </div>
 
-<div class="logo">
+                </div>
 
-<img src="Screenshot_3.png" style="width:90px;">
+                <button class="newChat">
 
-</div>
+                    <i class="fa-regular fa-comment-dots"></i>
 
+                    New Conversation
 
+                    <i class="fa-solid fa-plus"></i>
 
-<div>
+                </button>
 
-<div class="title">
+                <div class="menu">
 
-AK Tiwari And Associates
+                    <div class="menuItem">
+                        <i class="fa-regular fa-clock"></i>
+                        Chat History
+                    </div>
 
-</div>
+                    <div class="menuItem">
+                        <i class="fa-regular fa-bookmark"></i>
+                        Saved Answers
+                    </div>
 
+                    <div class="menuItem">
+                        <i class="fa-regular fa-file-lines"></i>
+                        Legal Documents
+                    </div>
 
-<div class="status">
+                    <div class="menuItem">
+                        <i class="fa-regular fa-user"></i>
+                        Profile
+                    </div>
 
-🟢 Online
+                    <div class="menuItem">
+                        <i class="fa-solid fa-gear"></i>
+                        Settings
+                    </div>
 
-</div>
+                    <div class="menuItem">
+                        <i class="fa-regular fa-envelope"></i>
+                        Contact Us
+                    </div>
 
+                </div>
 
-</div>
+            </div>
 
+            <div>
 
+                <div class="partnerCard">
 
-<button
+                    <i class="fa-solid fa-shield-halved"></i>
 
-class="endChatBtn"
+                    <div>
 
-onclick=
-"clearChat()">
+                        <h4>Your Legal Partner</h4>
 
-End Chat
+                        <p>Always By Your Side</p>
 
-</button>
+                        <span>
+                            Trusted • Confidential • Professional
+                        </span>
 
+                    </div>
 
+                </div>
 
-</div>
+                <div class="onlineCard">
 
+                    <span class="dot"></span>
 
+                    <div>
 
+                        <h4>We Are Online</h4>
 
+                        <p>Average response time : Instant</p>
 
-<!-- CHAT -->
+                    </div>
 
+                </div>
 
-<div
-id="chat">
+                <div class="copyright">
 
-</div>
+                    © 2026 AK Tiwari & Associates
 
-<!-- INPUT -->
+                </div>
 
+            </div>
 
-<div class="inputBox">
+        </aside>
 
+        <!-- ========================= -->
+        <!-- CHAT AREA -->
+        <!-- ========================= -->
 
-<button
+        <main class="chatSection">
 
-class="voiceBtn"
+            <!-- Header -->
 
-onclick=
-"startVoice()">
+            <div class="chatHeader">
 
-🎤
+                <div class="headerLeft">
 
-</button>
+                    <img src="Screenshot_3.png" class="headerLogo">
 
+                    <div>
 
+                        <h2>AK Tiwari & Associates</h2>
 
-<input
+                        <p>AI Legal Assistant</p>
 
-id="msg"
+                        <div class="statusRow">
 
-placeholder=
-"Ask legal question...">
+                            <span class="onlineBadge">
 
+                                <span class="greenDot"></span>
 
+                                Online
 
+                            </span>
 
-<button
+                            <span>Trusted</span>
 
-class=
-"sendBtn"
+                            <span>•</span>
 
-onclick=
-"sendMessage()">
+                            <span>Confidential</span>
 
-➤
+                            <span>•</span>
 
-</button>
+                            <span>Fast</span>
 
+                        </div>
 
+                    </div>
 
-</div>
+                </div>
 
+                <div class="headerRight">
 
+                    <button onclick="clearChat()" class="endChat">
 
+                        <i class="fa-solid fa-power-off"></i>
 
+                        End Chat
 
+                    </button>
 
+                    <div class="avatar">
 
+                        <i class="fa-solid fa-user"></i>
 
+                    </div>
 
+                </div>
 
+            </div>
 
-</div>
+            <!-- Welcome Card -->
 
+            <div class="welcomeCard">
 
+                <img src="https://cdn-icons-png.flaticon.com/512/4712/4712035.png">
 
+                <div>
 
+                    <h2>
 
+                        Welcome to Legal AI India 👋
 
+                    </h2>
 
+                    <p>
 
+                        Ask any question related to Indian law and get clear,
+                        practical legal guidance.
 
-<div
-id="popup"
+                    </p>
 
-class=
-"popup">
+                </div>
 
+            </div>
 
+            <!-- Chat -->
 
-<div
-class=
-"login-card">
+            <div id="chat"></div>
 
+            <!-- Suggestions -->
 
-<div class="login-logo">
+            <div class="suggestions">
 
-<img src="Screenshot_3.png" style="width:90px;">
+                <button>❤️ Divorce</button>
 
-</div>
+                <button>🏠 Property</button>
 
+                <button>💰 Maintenance</button>
 
+                <button>👶 Child Custody</button>
 
-<h3>
+                <button>📄 Cheque Bounce</button>
 
-AK Tiwari And Associates AI Chat Box
+                <button>⚖ Bail</button>
 
-</h3>
+            </div>
 
+            <!-- Input -->
 
+            <div class="inputArea">
 
-<p>
+                <button onclick="startVoice()" class="voiceBtn">
 
-Login to continue your legal consultation
+                    <i class="fa-solid fa-microphone"></i>
 
-</p>
+                </button>
 
+                <input id="msg"
+                    placeholder="Ask your Indian legal question...">
 
+                <button class="attach">
 
+                    <i class="fa-solid fa-paperclip"></i>
 
-<input
+                </button>
 
-id="name"
+                <button onclick="sendMessage()" class="sendBtn">
 
-placeholder=
+                    <i class="fa-solid fa-paper-plane"></i>
 
-"Enter your name">
+                </button>
 
+            </div>
 
+        </main>
 
+        <!-- ========================= -->
+        <!-- RIGHT SIDEBAR -->
+        <!-- ========================= -->
 
+        <aside class="rightPanel">
 
-<input
+            <div class="card">
 
-id="phone"
+                <h3>
 
-type="tel"
+                    Why Choose Legal AI India?
 
-placeholder=
+                </h3>
 
-"Enter mobile number">
+                <div class="feature">
 
+                    <i class="fa-solid fa-shield"></i>
 
+                    <div>
 
+                        <h4>100% Indian Law</h4>
 
+                        <p>Reliable legal information</p>
 
-<button
-onclick=
-"submitLead()"
+                    </div>
 
-class=
-"loginBtn">
+                    ✅
 
-Login
+                </div>
 
-</button>
+                <div class="feature">
 
+                    <i class="fa-solid fa-bolt"></i>
 
+                    <div>
 
+                        <h4>Instant Responses</h4>
 
-<div class="login-note">
+                        <p>Fast & smart answers</p>
 
-🔒 Your details remain secure
+                    </div>
 
-</div>
+                    ✅
 
+                </div>
 
+                <div class="feature">
 
-</div>
+                    <i class="fa-solid fa-lock"></i>
 
+                    <div>
 
+                        <h4>Secure & Private</h4>
 
-</div>
+                        <p>Your chats stay protected</p>
 
+                    </div>
 
+                    ✅
 
+                </div>
 
+                <div class="feature">
 
+                    <i class="fa-solid fa-file-lines"></i>
 
+                    <div>
 
+                        <h4>Expert Guidance</h4>
 
-<script
-src="script.js">
+                        <p>Easy-to-understand advice</p>
 
-</script>
+                    </div>
 
+                    ✅
 
+                </div>
 
+            </div>
+
+            <div class="card">
+
+                <h3>Popular Questions</h3>
+
+                <ul class="questionList">
+
+                    <li>Can my wife claim maintenance?</li>
+
+                    <li>How to file an FIR?</li>
+
+                    <li>Property Rights after Marriage?</li>
+
+                    <li>How to get Mutual Divorce?</li>
+
+                    <li>Cheque Bounce Procedure?</li>
+
+                </ul>
+
+                <button class="viewAll">
+
+                    View All Questions
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </button>
+
+            </div>
+
+        </aside>
+
+    </div>
+
+    <!-- ========================= -->
+    <!-- LOGIN POPUP -->
+    <!-- ========================= -->
+
+    <div id="popup" class="popup">
+
+        <div class="loginCard">
+
+            <img src="Screenshot_3.png">
+
+            <h2>
+
+                Welcome to Legal AI
+
+            </h2>
+
+            <p>
+
+                Login to continue your legal consultation.
+
+            </p>
+
+            <input id="name"
+                placeholder="Enter your name">
+
+            <input id="phone"
+                type="tel"
+                placeholder="Enter mobile number">
+
+            <button onclick="submitLead()">
+
+                Continue
+
+            </button>
+
+            <small>
+
+                🔒 Your information remains secure.
+
+            </small>
+
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
 
 </body>
-
 
 </html>
