@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
@@ -9,699 +10,274 @@
 name="viewport"
 content="width=device-width, initial-scale=1.0">
 
+
 <title>
-AK Tiwari & Associates | Legal AI
+
+AK Tiwari and Associates
+
 </title>
+
+
 
 <link
 rel="stylesheet"
 href="style.css">
 
+
 <script
 src="https://cdn.jsdelivr.net/npm/marked/marked.min.js">
+
 </script>
 
-<link
-rel="preconnect"
-href="https://fonts.googleapis.com">
-
-<link
-rel="preconnect"
-href="https://fonts.gstatic.com"
-crossorigin>
-
-<link
-href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-rel="stylesheet">
-
-<link
-rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
 </head>
 
+
+
+
 <body>
 
-<!-- Background -->
 
-<div class="bg bg1"></div>
-<div class="bg bg2"></div>
-<div class="bg bg3"></div>
 
-<div class="layout">
 
-<!-- ===========================
-LEFT SIDEBAR
-=========================== -->
+<div class="phone">
 
-<aside class="sidebar">
 
-<div class="sidebarTop">
 
-<div class="brand">
+<!-- HEADER -->
 
-<img
-src="Screenshot_3.png"
-class="logo">
+
+<div class="header">
+
+
+<div class="logo">
+
+<img src="Screenshot_3.png" style="width:90px;">
+
+</div>
+
+
 
 <div>
 
-<h2>
-AK Tiwari &
-Associates
-</h2>
+<div class="title">
 
-<p>
-Legal AI Assistant
-</p>
+AK Tiwari And Associates
 
 </div>
 
+
+<div class="status">
+
+🟢 Online
+
 </div>
+
+
+</div>
+
+
 
 <button
-class="newChat">
 
-<i class="fa-solid fa-plus"></i>
-
-<span>
-
-New Chat
-
-</span>
-
-</button>
-
-</div>
-
-<div class="menu">
-
-<div class="menuTitle">
-
-MENU
-
-</div>
-
-<a href="#"
-class="menuItem">
-
-<i class="fa-regular fa-message"></i>
-
-<span>
-
-New Conversation
-
-</span>
-
-</a>
-
-<a href="#"
-class="menuItem">
-
-<i class="fa-regular fa-clock"></i>
-
-<span>
-
-Recent Chats
-
-</span>
-
-</a>
-
-<a href="#"
-class="menuItem">
-
-<i class="fa-regular fa-bookmark"></i>
-
-<span>
-
-Saved Answers
-
-</span>
-
-</a>
-
-<a href="#"
-class="menuItem">
-
-<i class="fa-regular fa-file-lines"></i>
-
-<span>
-
-Legal Documents
-
-</span>
-
-</a>
-
-<a href="#"
-class="menuItem">
-
-<i class="fa-regular fa-user"></i>
-
-<span>
-
-My Profile
-
-</span>
-
-</a>
-
-<a href="#"
-class="menuItem">
-
-<i class="fa-solid fa-gear"></i>
-
-<span>
-
-Settings
-
-</span>
-
-</a>
-
-<a href="#"
-class="menuItem">
-
-<i class="fa-regular fa-envelope"></i>
-
-<span>
-
-Contact Us
-
-</span>
-
-</a>
-
-</div>
-
-<div class="sidebarCard">
-
-<div class="cardIcon">
-
-⚖️
-
-</div>
-
-<h3>
-
-Your Trusted Legal Partner
-
-</h3>
-
-<p>
-
-Professional legal guidance powered by AI.
-
-Fast responses.
-
-Private conversations.
-
-Easy explanations.
-
-</p>
-
-</div>
-
-<div class="onlineStatus">
-
-<div class="onlineDot"></div>
-
-<div>
-
-<h4>
-
-Online Support
-
-</h4>
-
-<p>
-
-Average response time
-
-Less than 10 seconds
-
-</p>
-
-</div>
-
-</div>
-
-<div class="copyright">
-
-© 2026 AK Tiwari & Associates
-
-</div>
-
-</aside>
-
-<!-- ===========================
-MAIN SECTION
-=========================== -->
-
-<main class="main">
-
-<header class="topbar">
-
-<div class="topLeft">
-
-<img
-src="Screenshot_3.png"
-class="topLogo">
-
-<div>
-
-<h2>
-
-Legal AI India
-
-</h2>
-
-<p>
-
-Powered by AK Tiwari & Associates
-
-</p>
-
-</div>
-
-</div>
-
-<div class="topRight">
-
-<button
 class="endChatBtn"
-onclick="clearChat()">
 
-<i class="fa-solid fa-trash"></i>
+onclick=
+"clearChat()">
 
 End Chat
 
 </button>
 
-<div class="profile">
 
-<i class="fa-solid fa-user"></i>
 
 </div>
 
-</div>
 
-</header>
 
-<section class="welcomeCard">
 
-<div class="robot">
 
-🤖
+<!-- CHAT -->
 
-</div>
 
-<div class="welcomeText">
-
-<h2>
-
-Welcome to Legal AI India
-
-</h2>
-
-<p>
-
-Ask any question related to Indian law and receive clear,
-professional and practical legal guidance within seconds.
-
-</p>
+<div
+id="chat">
 
 </div>
 
-<div class="lawIcon">
+<!-- INPUT -->
 
-⚖️
 
-</div>
+<div class="inputBox">
 
-</section>
-
-<!-- Chat Messages -->
-
-<div id="chat">
-    </div>
-
-<!-- ===========================
-BOTTOM INPUT AREA
-=========================== -->
-
-<div class="bottomArea">
-
-<div class="quickActions">
-
-<button onclick="fillQuestion('How can I file for divorce?')">
-💔 Divorce
-</button>
-
-<button onclick="fillQuestion('What are my property rights?')">
-🏠 Property
-</button>
-
-<button onclick="fillQuestion('Can my wife claim maintenance?')">
-💰 Maintenance
-</button>
-
-<button onclick="fillQuestion('How can I file an FIR?')">
-🚔 FIR
-</button>
-
-<button onclick="fillQuestion('How does cheque bounce law work?')">
-💳 Cheque Bounce
-</button>
-
-<button onclick="fillQuestion('Who gets child custody?')">
-👶 Child Custody
-</button>
-
-<button onclick="fillQuestion('What is anticipatory bail?')">
-⚖️ Bail
-</button>
-
-</div>
-
-<div class="inputWrapper">
 
 <button
-class="voiceBtn"
-onclick="startVoice()">
 
-<i class="fa-solid fa-microphone"></i>
+class="voiceBtn"
+
+onclick=
+"startVoice()">
+
+🎤
 
 </button>
+
+
 
 <input
+
 id="msg"
-type="text"
-placeholder="Ask your Indian legal question...">
+
+placeholder=
+"Ask legal question...">
+
+
+
 
 <button
-class="sendBtn"
-onclick="sendMessage()">
 
-<i class="fa-solid fa-paper-plane"></i>
+class=
+"sendBtn"
+
+onclick=
+"sendMessage()">
+
+➤
 
 </button>
 
-</div>
+
 
 </div>
 
-</main>
 
-<!-- ===========================
-RIGHT PANEL
-=========================== -->
 
-<aside class="rightPanel">
 
-<div class="panelCard">
 
-<h3>
 
-Why Choose Legal AI?
 
-</h3>
 
-<div class="feature">
 
-<div class="featureIcon blue">
 
-<i class="fa-solid fa-scale-balanced"></i>
 
 </div>
 
-<div>
 
-<h4>
 
-Indian Law Focused
 
-</h4>
 
-<p>
 
-Answers are tailored specifically to Indian legal matters.
 
-</p>
 
-</div>
-
-</div>
-
-<div class="feature">
-
-<div class="featureIcon green">
-
-<i class="fa-solid fa-bolt"></i>
-
-</div>
-
-<div>
-
-<h4>
-
-Instant Replies
-
-</h4>
-
-<p>
-
-Receive fast and practical legal information.
-
-</p>
-
-</div>
-
-</div>
-
-<div class="feature">
-
-<div class="featureIcon purple">
-
-<i class="fa-solid fa-lock"></i>
-
-</div>
-
-<div>
-
-<h4>
-
-Private Conversations
-
-</h4>
-
-<p>
-
-Your chat remains confidential.
-
-</p>
-
-</div>
-
-</div>
-
-<div class="feature">
-
-<div class="featureIcon orange">
-
-<i class="fa-solid fa-book"></i>
-
-</div>
-
-<div>
-
-<h4>
-
-Easy Language
-
-</h4>
-
-<p>
-
-Complex legal concepts explained in simple words.
-
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-<div class="panelCard">
-
-<h3>
-
-Popular Questions
-
-</h3>
-
-<ul class="popularQuestions">
-
-<li onclick="fillQuestion('How can I file for divorce?')">
-
-💔 Divorce Process
-
-</li>
-
-<li onclick="fillQuestion('How can I file an FIR?')">
-
-🚔 FIR Procedure
-
-</li>
-
-<li onclick="fillQuestion('Can my wife claim maintenance?')">
-
-💰 Maintenance Rights
-
-</li>
-
-<li onclick="fillQuestion('Who gets child custody?')">
-
-👶 Child Custody
-
-</li>
-
-<li onclick="fillQuestion('How does cheque bounce law work?')">
-
-💳 Cheque Bounce
-
-</li>
-
-<li onclick="fillQuestion('What are my property rights?')">
-
-🏠 Property Dispute
-
-</li>
-
-</ul>
-
-</div>
-
-<div class="panelCard statsCard">
-
-<h3>
-
-Legal AI Statistics
-
-</h3>
-
-<div class="stat">
-
-<h2>
-
-24/7
-
-</h2>
-
-<p>
-
-Availability
-
-</p>
-
-</div>
-
-<div class="stat">
-
-<h2>
-
-100%
-
-</h2>
-
-<p>
-
-Indian Law
-
-</p>
-
-</div>
-
-<div class="stat">
-
-<h2>
-
-Fast
-
-</h2>
-
-<p>
-
-Response Time
-
-</p>
-
-</div>
-
-</div>
-
-</aside>
-
-</div>
-
-<!-- ===========================
-LOGIN POPUP
-=========================== -->
 
 <div
 id="popup"
-class="popup">
 
-<div class="loginCard">
+class=
+"popup">
 
-<img
-src="Screenshot_3.png"
-class="popupLogo">
 
-<h2>
 
-Welcome to Legal AI India
+<div
+class=
+"login-card">
 
-</h2>
+
+<div class="login-logo">
+
+<img src="Screenshot_3.png" style="width:90px;">
+
+</div>
+
+
+
+<h3>
+
+AK Tiwari And Associates AI Chat Box
+
+</h3>
+
+
 
 <p>
 
-Please enter your details to begin your confidential legal consultation.
+Login to continue your legal consultation
 
 </p>
 
-<input
-id="name"
-type="text"
-placeholder="Enter your full name">
+
+
 
 <input
+
+id="name"
+
+placeholder=
+
+"Enter your name">
+
+
+
+
+
+<input
+
 id="phone"
+
 type="tel"
-placeholder="Enter mobile number">
+
+placeholder=
+
+"Enter mobile number">
+
+
+
+
 
 <button
-class="loginBtn"
-onclick="submitLead()">
+onclick=
+"submitLead()"
 
-Start Consultation
+class=
+"loginBtn">
+
+Login
 
 </button>
 
-<p class="privacy">
 
-🔒 Your information remains secure and confidential.
 
-</p>
+
+<div class="login-note">
+
+🔒 Your details remain secure
 
 </div>
 
+
+
 </div>
 
-<script src="script.js"></script>
+
+
+</div>
+
+
+
+
+
+
+
+
+<script
+src="script.js">
+
+</script>
+
+
+
 
 </body>
+
 
 </html>
