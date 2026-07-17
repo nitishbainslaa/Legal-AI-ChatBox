@@ -1,840 +1,948 @@
-let loggedIn =
-localStorage.getItem(
-"legal_ai_login"
-);
+// ======================================================
+// AK TIWARI & ASSOCIATES
+// AI LEGAL ASSISTANT
+// Part 1
+// ======================================================
 
+// =========================
+// DOM ELEMENTS
+// =========================
 
+const chat = document.getElementById("chat");
+const input = document.getElementById("msg");
 
-// ======================
+const popup = document.getElementById("popup");
+
+const suggestionButtons =
+document.querySelectorAll(".suggestions button");
+
+const popularQuestions =
+document.querySelectorAll(".questionList li");
+
+const newChatBtn =
+document.querySelector(".newChat");
+
+// =========================
+// STORAGE KEYS
+// =========================
+
+const CHAT_KEY = "legal_ai_chat";
+
+const LOGIN_KEY = "legal_ai_login";
+
+const CHAT_HISTORY_KEY = "userChats";
+
+// =========================
 // PAGE LOAD
-// ======================
+// =========================
 
-window.onload = ()=>{
+window.addEventListener("load", () => {
 
-let oldChat =
+    loadChat();
 
-localStorage.getItem(
-"chat"
-);
+    bindSuggestions();
 
+    bindPopularQuestions();
 
+    bindNewChat();
 
-let chat =
-
-document.getElementById(
-"chat"
-);
-
-
-
-if(
-oldChat
-){
-
-chat.innerHTML=
-oldChat;
-
-}
-else{
-
-appendAI(
-
-`Hello 👋<br><br>
-
-AK Tiwari And Associates Legal AI Chat Box. 
-
-How may I help you?`
-
-);
-
-}
-
-};
-
-
-
-
-
-// ======================
-// POPUP AFTER 3 MIN
-// ======================
-
-window.addEventListener(
-
-"load",
-
-()=>{
-
-setTimeout(()=>{
-
-if(
-
-localStorage.getItem(
-
-"legal_ai_login"
-
-)!=="true"
-
-){
-
-document
-.getElementById(
-"popup"
-)
-
-.style.display=
-
-"flex";
-
-}
-
-},180000);
+    showPopupLater();
 
 });
 
+// =========================
+// LOAD CHAT
+// =========================
 
+function loadChat() {
 
+    const savedChat =
+        localStorage.getItem(CHAT_KEY);
 
+    if (savedChat) {
 
+        chat.innerHTML = savedChat;
 
+        scrollBottom();
 
-// ======================
+        return;
+
+    }
+
+    welcomeMessage();
+
+}
+
+// =========================
+// WELCOME MESSAGE
+// =========================
+
+function welcomeMessage() {
+
+    appendAI(`
+
+# 👋 Welcome to AK Tiwari & Associates
+
+I am your **AI Legal Assistant**.
+
+You can ask questions related to:
+
+- Divorce
+- Maintenance
+- Child Custody
+- Domestic Violence
+- Property Disputes
+- Cheque Bounce
+- FIR
+- Bail
+- Cyber Crime
+
+How may I assist you today?
+
+`);
+
+}
+
+// =========================
+// NEW CHAT
+// =========================
+
+function bindNewChat() {
+
+    if (!newChatBtn) return;
+
+    newChatBtn.addEventListener(
+
+        "click",
+
+        () => {
+
+            if (
+
+                confirm(
+
+                    "Start a new conversation?"
+
+                )
+
+            ) {
+
+                localStorage.removeItem(CHAT_KEY);
+
+                localStorage.removeItem(CHAT_HISTORY_KEY);
+
+                chat.innerHTML = "";
+
+                welcomeMessage();
+
+            }
+
+        }
+
+    );
+
+}
+
+// =========================
+// SUGGESTION BUTTONS
+// =========================
+
+function bindSuggestions() {
+
+    suggestionButtons.forEach((button) => {
+
+        button.addEventListener(
+
+            "click",
+
+            () => {
+
+                input.value =
+
+                    button.innerText;
+
+                input.focus();
+
+            }
+
+        );
+
+    });
+
+}
+
+// =========================
+// POPULAR QUESTIONS
+// =========================
+
+function bindPopularQuestions() {
+
+    popularQuestions.forEach((item) => {
+
+        item.addEventListener(
+
+            "click",
+
+            () => {
+
+                input.value =
+
+                    item.innerText;
+
+                input.focus();
+
+            }
+
+        );
+
+    });
+
+}
+
+// =========================
+// SAVE CHAT
+// =========================
+
+function saveChat() {
+
+    localStorage.setItem(
+
+        CHAT_KEY,
+
+        chat.innerHTML
+
+    );
+
+}
+
+// =========================
+// AUTO SCROLL
+// =========================
+
+function scrollBottom() {
+
+    chat.scrollTop =
+
+        chat.scrollHeight;
+
+}
+
+// =========================
+// APPEND USER
+// =========================
+
+function appendUser(message) {
+
+    const div = document.createElement("div");
+
+    div.className = "user fade";
+
+    div.innerHTML = `
+
+${message}
+
+<div class="time">
+
+${getTime()}
+
+</div>
+
+`;
+
+    chat.appendChild(div);
+
+    scrollBottom();
+
+    saveChat();
+
+}
+
+// =========================
+// APPEND AI
+// =========================
+
+function appendAI(message) {
+
+    const div = document.createElement("div");
+
+    div.className = "ai fade";
+
+    div.innerHTML = marked.parse(message) +
+
+        `
+
+<div class="time">
+
+${getTime()}
+
+</div>
+
+`;
+
+    chat.appendChild(div);
+
+    scrollBottom();
+
+    saveChat();
+
+}
+
+// =========================
+// TIME
+// =========================
+
+function getTime() {
+
+    return new Date()
+
+        .toLocaleTimeString(
+
+            [],
+
+            {
+
+                hour: "2-digit",
+
+                minute: "2-digit"
+
+            }
+
+        );
+
+}
+
+// =========================
+// CLEAR CHAT
+// =========================
+
+function clearChat() {
+
+    if (
+
+        !confirm(
+
+            "Are you sure you want to clear this conversation?"
+
+        )
+
+    ) return;
+
+    localStorage.removeItem(CHAT_KEY);
+
+    localStorage.removeItem(CHAT_HISTORY_KEY);
+
+    chat.innerHTML = "";
+
+    welcomeMessage();
+
+}
+
+// =========================
+// SHOW LOGIN POPUP
+// =========================
+
+function showPopupLater() {
+
+    setTimeout(() => {
+
+        if (
+
+            localStorage.getItem(LOGIN_KEY)
+
+            !== "true"
+
+        ) {
+
+            popup.style.display = "flex";
+
+        }
+
+    }, 180000);
+
+}
+
+// =========================
+// ENTER KEY
+// =========================
+
+input.addEventListener(
+
+    "keydown",
+
+    function (e) {
+
+        if (
+
+            e.key === "Enter"
+
+        ) {
+
+            e.preventDefault();
+
+            sendMessage();
+
+        }
+
+    }
+  // ======================================================
+// PART 2
+// AI CHAT
+// ======================================================
+
+// =========================
 // SEND MESSAGE
-// ======================
+// =========================
 
-async function sendMessage(){
+async function sendMessage() {
 
+    const message = input.value.trim();
 
-let msg=
+    if (!message) return;
 
-document
-.getElementById(
-"msg"
-)
+    appendUser(message);
 
-.value
-.trim();
+    input.value = "";
 
+    showTyping();
 
+    try {
 
-if(!msg)
-return;
+        const response = await fetch("/api/chat", {
 
+            method: "POST",
 
+            headers: {
+                "Content-Type": "application/json"
+            },
 
-appendUser(
-msg
-);
+            body: JSON.stringify({
+                message: message
+            })
 
+        });
 
+        if (!response.ok) {
 
-document
-.getElementById(
-"msg"
-)
+            throw new Error("Server Error");
 
-.value=
-"";
+        }
 
+        const data = await response.json();
 
+        removeTyping();
 
-appendTyping();
+        appendAI(data.reply);
 
+        saveConversation(message, data.reply);
 
+    }
 
+    catch (error) {
 
-try{
+        console.error(error);
 
+        removeTyping();
 
-let response=
+        appendAI(`
+### ❌ Unable to connect
 
-await fetch(
+The AI server is currently unavailable.
 
-"/api/chat",
+Please try again after some time.
+`);
 
-{
-
-method:
-"POST",
-
-headers:{
-
-"Content-Type":
-
-"application/json"
-
-},
-
-body:
-
-JSON.stringify({
-
-message:
-msg
-
-})
+    }
 
 }
 
-);
+// =========================
+// TYPING ANIMATION
+// =========================
 
+function showTyping() {
 
+    removeTyping();
 
-let data=
+    const typing = document.createElement("div");
 
-await response.json();
+    typing.className = "ai";
 
+    typing.id = "typing";
 
+    typing.innerHTML = `
 
-removeTyping();
+<div class="typing">
 
+<span></span>
+<span></span>
+<span></span>
 
+</div>
 
-appendAI(
+<div class="time">
 
-marked.parse(
+Typing...
 
-data.reply
+</div>
 
-)
+`;
 
-);
+    chat.appendChild(typing);
 
+    scrollBottom();
 
+}
 
+// =========================
+// REMOVE TYPING
+// =========================
 
+function removeTyping() {
 
-// SAVE chats
+    const typing = document.getElementById("typing");
 
-let chats =
+    if (typing) {
 
-JSON.parse(
+        typing.remove();
 
-localStorage.getItem(
+    }
 
-"userChats"
+}
 
-)
+// =========================
+// SAVE HISTORY
+// =========================
 
-||
+function saveConversation(question, answer) {
 
-"[]"
+    let history = JSON.parse(
 
-);
+        localStorage.getItem(CHAT_HISTORY_KEY)
 
+        || "[]"
 
+    );
 
-chats.push({
+    history.push({
 
-question:
-msg,
+        question,
 
-answer:
-data.reply,
+        answer,
 
-time:
+        date: new Date().toLocaleString()
 
-new Date()
+    });
 
-.toLocaleString()
+    localStorage.setItem(
+
+        CHAT_HISTORY_KEY,
+
+        JSON.stringify(history)
+
+    );
+
+}
+
+// =========================
+// COPY AI MESSAGE
+// =========================
+
+document.addEventListener("click", function (e) {
+
+    if (!e.target.classList.contains("copyBtn")) return;
+
+    const message =
+
+        e.target.parentElement.innerText;
+
+    navigator.clipboard.writeText(message);
+
+    e.target.innerHTML = "Copied ✓";
+
+    setTimeout(() => {
+
+        e.target.innerHTML = "Copy";
+
+    }, 1500);
 
 });
 
+// =========================
+// REGENERATE
+// =========================
 
+async function regenerateResponse(question) {
 
-localStorage.setItem(
+    input.value = question;
 
-"userChats",
-
-JSON.stringify(
-
-chats
-
-)
-
-);
-
-
-
-
-saveChat();
-
-
-
-}
-catch(err){
-
-
-removeTyping();
-
-
-appendAI(
-
-"❌ AI unavailable"
-
-);
-
-
-console.log(
-err
-);
-
+    sendMessage();
 
 }
 
+// =========================
+// LOADING BUTTON
+// =========================
+
+function disableInput() {
+
+    input.disabled = true;
 
 }
 
+function enableInput() {
 
+    input.disabled = false;
 
+    input.focus();
 
+}
 
+// =========================
+// UPDATE SEND MESSAGE
+// =========================
 
+// sendMessage() ke start me
 
+// disableInput();
 
-// ======================
+// aur finally me
+
+// enableInput();
+
+// add karna.
+
+);
+// ======================================================
+// PART 3
+// LOGIN + VOICE + UTILITIES
+// ======================================================
+
+// =========================
+// UPDATE AI MESSAGE
+// =========================
+
+function appendAI(message) {
+
+    const div = document.createElement("div");
+
+    div.className = "ai fade";
+
+    div.innerHTML = `
+
+${marked.parse(message)}
+
+<div class="messageActions">
+
+<button class="copyBtn">
+
+<i class="fa-regular fa-copy"></i>
+
+Copy
+
+</button>
+
+</div>
+
+<div class="time">
+
+${getTime()}
+
+</div>
+
+`;
+
+    chat.appendChild(div);
+
+    scrollBottom();
+
+    saveChat();
+
+}
+
+// =========================
 // LOGIN
-// ======================
+// =========================
 
-async function submitLead(){
+async function submitLead() {
 
+    const name =
 
-let name=
+        document.getElementById("name")
 
-document
-.getElementById(
-"name"
-)
+        .value.trim();
 
-.value
-.trim();
+    const phone =
 
+        document.getElementById("phone")
 
+        .value.trim();
 
-let phone=
+    if (name.length < 2) {
 
-document
-.getElementById(
-"phone"
-)
+        alert("Please enter your name.");
 
-.value
-.trim();
+        return;
 
+    }
 
+    if (!/^[6-9]\d{9}$/.test(phone)) {
 
-if(
+        alert("Enter a valid mobile number.");
 
-name.length<2
+        return;
 
-||
+    }
 
-phone.length<10
+    const chats = JSON.parse(
 
-){
+        localStorage.getItem(CHAT_HISTORY_KEY)
 
-alert(
+        || "[]"
 
-"Enter valid details"
+    );
 
-);
+    try {
 
-return;
-
-}
-
-
-
-
-
-let chats=
-
-JSON.parse(
-
-localStorage.getItem(
-
-"userChats"
-
-)
-
-||
-
-"[]"
-
-);
-
-
-
-
-
-try{
-
-
-await fetch(
+        await fetch(
 
 "https://script.google.com/macros/s/AKfycbxY94PtzZ8uWTvO-Hrd9pASGW0dmHMwGlITLwRVcEv9RMnHZ-TKuLabfgIapUmF0LaQvg/exec",
 
-{
+            {
 
-method:
-"POST",
+                method: "POST",
 
-mode:
-"no-cors",
+                mode: "no-cors",
 
-headers:{
+                headers: {
 
-"Content-Type":
+                    "Content-Type": "text/plain"
 
-"text/plain"
+                },
 
-},
+                body: JSON.stringify({
 
-body:
+                    name,
 
-JSON.stringify({
+                    phone,
 
-name,
+                    chats
 
-phone,
+                })
 
-chats
+            }
 
-})
+        );
+
+    }
+
+    catch (e) {
+
+        console.log(e);
+
+    }
+
+    localStorage.setItem(
+
+        LOGIN_KEY,
+
+        "true"
+
+    );
+
+    localStorage.setItem(
+
+        "legal_name",
+
+        name
+
+    );
+
+    localStorage.setItem(
+
+        "legal_phone",
+
+        phone
+
+    );
+
+    popup.style.display = "none";
+
+    alert("Welcome " + name);
 
 }
+
+// =========================
+// VOICE
+// =========================
+
+function startVoice() {
+
+    if (
+
+        !("webkitSpeechRecognition" in window) &&
+
+        !("SpeechRecognition" in window)
+
+    ) {
+
+        alert(
+
+            "Voice recognition not supported."
+
+        );
+
+        return;
+
+    }
+
+    const SpeechRecognition =
+
+        window.SpeechRecognition ||
+
+        window.webkitSpeechRecognition;
+
+    const recognition =
+
+        new SpeechRecognition();
+
+    recognition.lang = "en-IN";
+
+    recognition.interimResults = false;
+
+    recognition.start();
+
+    recognition.onresult = function (e) {
+
+        input.value =
+
+            e.results[0][0].transcript;
+
+        input.focus();
+
+    };
+
+    recognition.onerror = function () {
+
+        alert("Voice recognition failed.");
+
+    };
+
+}
+
+// =========================
+// COPY BUTTON
+// =========================
+
+document.addEventListener(
+
+    "click",
+
+    function (e) {
+
+        const btn =
+
+            e.target.closest(".copyBtn");
+
+        if (!btn) return;
+
+        const text =
+
+            btn.parentElement.parentElement.innerText;
+
+        navigator.clipboard.writeText(text);
+
+        btn.innerHTML =
+
+            '<i class="fa-solid fa-check"></i> Copied';
+
+        setTimeout(() => {
+
+            btn.innerHTML =
+
+                '<i class="fa-regular fa-copy"></i> Copy';
+
+        }, 2000);
+
+    }
 
 );
 
+// =========================
+// SUGGESTIONS
+// =========================
 
-}
-catch(err){
+suggestionButtons.forEach(button => {
+
+    button.addEventListener("click", () => {
+
+        input.value =
+
+            button.innerText;
+
+        sendMessage();
+
+    });
+
+});
+
+// =========================
+// POPULAR QUESTIONS
+// =========================
+
+popularQuestions.forEach(item => {
+
+    item.addEventListener("click", () => {
+
+        input.value =
+
+            item.innerText;
+
+        sendMessage();
+
+    });
+
+});
+
+// =========================
+// AUTO RESIZE
+// =========================
+
+input.addEventListener(
+
+    "input",
+
+    () => {
+
+        input.style.height = "58px";
+
+        input.style.height =
+
+            input.scrollHeight + "px";
+
+    }
+
+);
+
+// =========================
+// PAGE REFRESH
+// =========================
+
+window.addEventListener(
+
+    "beforeunload",
+
+    saveChat
+
+);
+
+// =========================
+// INIT
+// =========================
+
+scrollBottom();
 
 console.log(
-err
-);
 
-}
-
-
-
-
-localStorage.setItem(
-
-"legal_ai_login",
-
-"true"
+"⚖ AK Tiwari & Associates Legal AI Loaded"
 
 );
-
-
-
-localStorage.setItem(
-
-"name",
-
-name
-
-);
-
-
-
-localStorage.setItem(
-
-"phone",
-
-phone
-
-);
-
-
-
-
-localStorage.removeItem(
-
-"userChats"
-
-);
-
-
-
-
-document
-.getElementById(
-"popup"
-)
-
-.style.display=
-
-"none";
-
-
-
-alert(
-
-"Login successful"
-
-);
-
-
-}
-
-
-
-
-
-
-
-
-// ======================
-// USER MESSAGE
-// ======================
-
-function appendUser(msg){
-
-
-let chat=
-
-document
-.getElementById(
-"chat"
-);
-
-
-
-chat.innerHTML +=
-
-`
-
-<div class="user">
-
-${msg}
-
-<div class="time">
-
-${getTime()}
-
-</div>
-
-</div>
-
-`;
-
-
-
-scrollBottom();
-
-saveChat();
-
-}
-
-
-
-
-
-
-
-
-// ======================
-// AI MESSAGE
-// ======================
-
-function appendAI(msg){
-
-
-let chat=
-
-document
-.getElementById(
-"chat"
-);
-
-
-
-let ai=
-
-document.createElement(
-"div"
-);
-
-
-
-ai.className=
-"ai";
-
-
-
-ai.innerHTML=
-
-`
-
-⚖️ AK Tiwari And Associates
-
-<br><br>
-
-${msg}
-
-<div class="time">
-
-${getTime()}
-
-</div>
-
-`;
-
-
-
-chat.appendChild(
-ai
-);
-
-
-
-scrollBottom();
-
-saveChat();
-
-}
-
-
-
-
-
-function appendTyping(){
-
-let chat=
-
-document
-.getElementById(
-"chat"
-);
-
-
-chat.innerHTML +=
-
-`
-
-<div
-
-id="typing"
-
-class="ai">
-
-⚖️ AI typing...
-
-</div>
-
-`;
-
-scrollBottom();
-
-}
-
-
-
-function removeTyping(){
-
-let typing=
-
-document
-.getElementById(
-"typing"
-);
-
-
-if(
-typing
-){
-
-typing.remove();
-
-}
-
-}
-
-
-
-
-
-document
-.getElementById(
-"msg"
-)
-
-.addEventListener(
-
-"keypress",
-
-function(e){
-
-if(
-
-e.key==="Enter"
-
-){
-
-sendMessage();
-
-}
-
-}
-
-);
-
-
-
-
-
-
-
-function getTime(){
-
-return new Date()
-
-.toLocaleTimeString(
-
-[],
-
-{
-
-hour:
-"2-digit",
-
-minute:
-"2-digit"
-
-}
-
-);
-
-}
-
-
-
-
-
-function scrollBottom(){
-
-let chat=
-
-document
-.getElementById(
-"chat"
-);
-
-
-
-chat.scrollTop=
-
-chat.scrollHeight;
-
-}
-
-
-
-
-
-function saveChat(){
-
-localStorage.setItem(
-
-"chat",
-
-document
-.getElementById(
-"chat"
-)
-
-.innerHTML
-
-);
-
-}
-
-
-
-
-
-function clearChat(){
-
-localStorage.removeItem(
-"chat"
-);
-
-localStorage.removeItem(
-"userChats"
-);
-
-
-document
-.getElementById(
-"chat"
-)
-
-.innerHTML=
-"";
-
-
-appendAI(
-
-"Hello 👋"
-
-);
-
-}
-
-
-
-
-
-// ======================
-// VOICE
-// ======================
-
-function startVoice(){
-
-
-let recognition=
-
-new(
-
-window
-.SpeechRecognition
-
-||
-
-window
-.webkitSpeechRecognition
-
-)();
-
-
-
-recognition.lang=
-
-"en-IN";
-
-
-
-recognition.start();
-
-
-
-recognition.onresult=
-
-function(e){
-
-document
-.getElementById(
-"msg"
-)
-
-.value=
-
-e.results[0][0]
-.transcript;
-
-};
-
-
-}
