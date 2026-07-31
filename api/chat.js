@@ -6,6 +6,19 @@ const groq = new Groq({
 
 module.exports = async (req, res) => {
 
+  // =========================
+  // CORS HEADERS
+  // =========================
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+
+  // Handle Preflight Request
+  if (req.method === "OPTIONS") {
+    return res.status(200).end();
+  }
+
+  // Only POST Allowed
   if (req.method !== "POST") {
     return res.status(405).json({
       error: "Method not allowed"
@@ -22,16 +35,14 @@ module.exports = async (req, res) => {
       });
     }
 
-    const completion =
-      await groq.chat.completions.create({
+    const completion = await groq.chat.completions.create({
 
-        messages: [
+      messages: [
 
-          {
+        {
+          role: "system",
 
-            role: "system",
-
-content: `
+          content: `
 You are Legal AI India, an AI assistant focused exclusively on Indian law.
 
 Your goal is to provide clear, practical, accurate, and easy-to-understand legal information in a professional and human-like manner. Every response should feel like a conversation with an experienced legal professional, but never claim to be a lawyer, advocate, judge, or government authority.
@@ -110,54 +121,34 @@ Never write:
 - This is not legal advice
 
 End immediately after the follow-up question (if asked) or after the Important Points section.
-
 `
+        },
 
-          },
+        {
+          role: "user",
+          content: userMessage
+        }
 
-          {
+      ],
 
-            role: "user",
-
-            content: userMessage
-
-          }
-
-        ],
-
-        model: "llama-3.3-70b-versatile",
-        
-        temperature: 0.2,
-        
-        top_p: 0.9,
-        
-        max_tokens: 700
-
-      });
-
-
-    return res.status(200).json({
-
-      reply:
-
-        completion
-          .choices[0]
-          .message
-          .content
+      model: "llama-3.3-70b-versatile",
+      temperature: 0.2,
+      top_p: 0.9,
+      max_tokens: 700
 
     });
 
-  }
+    return res.status(200).json({
+      reply: completion.choices[0].message.content
+    });
 
-  catch (err) {
+  } catch (err) {
 
-    console.error(err);
+    console.error("Groq Error:", err);
 
     return res.status(500).json({
-
-      error:
-        "AI unavailable"
-
+      error: "AI unavailable",
+      details: err.message
     });
 
   }
