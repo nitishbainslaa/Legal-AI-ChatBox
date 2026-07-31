@@ -6,24 +6,54 @@ const groq = new Groq({
 
 module.exports = async (req, res) => {
 
-  // =========================
-  // CORS HEADERS
-  // =========================
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+// =========================
+// DOMAIN SECURITY + CORS
+// =========================
 
-  // Handle Preflight Request
-  if (req.method === "OPTIONS") {
-    return res.status(200).end();
-  }
+const allowedOrigins = [
+  "https://www.aktiwari.in",
+  "https://aktiwari.in"
+];
 
-  // Only POST Allowed
-  if (req.method !== "POST") {
-    return res.status(405).json({
-      error: "Method not allowed"
+const origin = req.headers.origin || "";
+const referer = req.headers.referer || "";
+
+const isAllowed =
+  allowedOrigins.includes(origin) ||
+  allowedOrigins.some(domain => referer.startsWith(domain));
+
+if (isAllowed) {
+  res.setHeader("Access-Control-Allow-Origin", origin || allowedOrigins[0]);
+}
+
+res.setHeader("Vary", "Origin");
+res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+
+// Handle Preflight
+if (req.method === "OPTIONS") {
+  if (!isAllowed) {
+    return res.status(403).json({
+      error: "Forbidden"
     });
   }
+
+  return res.status(200).end();
+}
+
+// Block unauthorized domains
+if (!isAllowed) {
+  return res.status(403).json({
+    error: "Access denied"
+  });
+}
+
+// Only POST Allowed
+if (req.method !== "POST") {
+  return res.status(405).json({
+    error: "Method not allowed"
+  });
+}
 
   try {
 
