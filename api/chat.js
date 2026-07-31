@@ -12,7 +12,8 @@ module.exports = async (req, res) => {
 
 const allowedOrigins = [
   "https://www.aktiwari.in",
-  "https://aktiwari.in"
+  "https://aktiwari.in",
+  "https://legal-ai-chat-box.vercel.app"
 ];
 
 const origin = req.headers.origin || "";
