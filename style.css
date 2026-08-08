@@ -2111,207 +2111,343 @@ padding:18px;
 }
 
 /* ==========================
-   Mobile
+   MOBILE
 ========================== */
 
 @media (max-width:768px){
 
-body{
+    body{
+        overflow:hidden;
+    }
 
-overflow:auto;
+    /* =================================
+       APP
+    ================================= */
+
+    .app{
+        display:block;
+        width:100%;
+        height:100vh;
+        position:relative;
+    }
+
+
+    /* =================================
+       MOBILE TOP LOGO BAR
+    ================================= */
+
+    .sidebar{
+
+        display:flex;
+
+        position:fixed;
+
+        top:0;
+        left:0;
+
+        width:100%;
+        height:65px;
+
+        padding:8px 20px;
+
+        background:#ffffff;
+
+        border-right:none;
+        border-bottom:1px solid #e8edf5;
+
+        z-index:9999;
+
+        align-items:center;
+        justify-content:center;
+
+        overflow:hidden;
+    }
+
+
+    /* Hide everything inside sidebar
+       except logo */
+
+    .sidebar > div:first-child{
+        width:100%;
+
+        display:flex;
+
+        align-items:center;
+        justify-content:center;
+    }
+
+
+    .logoBox{
+
+        width:auto;
+
+        margin:0;
+
+        display:flex;
+
+        align-items:center;
+        justify-content:center;
+    }
+
+
+    .logo{
+
+        width:auto;
+
+        height:48px;
+
+        max-width:220px;
+
+        object-fit:contain;
+
+        box-shadow:none;
+    }
+
+
+    /* Hide New Conversation */
+
+    .newChat{
+        display:none;
+    }
+
+
+    /* Hide bottom cards */
+
+    .sidebar > div:last-child{
+        display:none;
+    }
+
+
+    /* =================================
+       CHAT SECTION
+    ================================= */
+
+    .chatSection{
+
+        width:100%;
+
+        height:100vh;
+
+        padding-top:65px;
+
+        display:flex;
+
+        flex-direction:column;
+
+        overflow:hidden;
+    }
+
+
+    /* =================================
+       KEEP CHAT HEADER
+    ================================= */
+
+    .chatHeader{
+
+        display:flex;
+
+        padding:15px;
+
+        flex-shrink:0;
+    }
+
+
+    .headerLeft h2{
+        font-size:18px;
+    }
+
+    .headerLeft p{
+        font-size:13px;
+    }
+
+
+    .statusRow{
+        display:none;
+    }
+
+
+    .headerLogo{
+
+        width:48px;
+        height:48px;
+    }
+
+
+    .endChat{
+
+        padding:10px 14px;
+
+        font-size:13px;
+    }
+
+
+    .avatar{
+
+        width:44px;
+        height:44px;
+
+        font-size:18px;
+    }
+
+
+    /* =================================
+       WELCOME CARD
+    ================================= */
+
+    .welcomeCard{
+
+        flex-direction:column;
+
+        text-align:center;
+
+        padding:20px;
+
+        margin:15px;
+    }
+
+
+    .welcomeCard img{
+
+        width:70px;
+        height:70px;
+    }
+
+
+    .welcomeCard h2{
+
+        font-size:22px;
+    }
+
+
+    .welcomeCard p{
+
+        font-size:14px;
+    }
+
+
+    /* =================================
+       CHAT
+    ================================= */
+
+    #chat{
+
+        flex:1;
+
+        min-height:0;
+
+        padding:15px;
+
+        overflow-y:auto;
+    }
+
+
+    .ai{
+
+        max-width:100%;
+
+        padding:18px;
+
+        font-size:14px;
+    }
+
+
+    .user{
+
+        max-width:90%;
+
+        padding:18px;
+
+        font-size:14px;
+    }
+
+
+    /* =================================
+       INPUT
+    ================================= */
+
+    .inputArea{
+
+        padding:12px;
+
+        gap:10px;
+
+        flex-shrink:0;
+    }
+
+
+    #msg{
+
+        height:52px;
+
+        font-size:14px;
+    }
+
+
+    .voiceBtn,
+    .attach,
+    .sendBtn{
+
+        width:46px;
+
+        height:46px;
+
+        border-radius:14px;
+
+        flex-shrink:0;
+    }
+
+
+    /* =================================
+       SUGGESTIONS
+    ================================= */
+
+    .suggestions{
+
+        padding:12px;
+    }
+
+
+    .suggestions button{
+
+        font-size:13px;
+
+        padding:10px 14px;
+    }
+
+
+    /* =================================
+       LOGIN POPUP
+    ================================= */
+
+    .loginCard{
+
+        padding:30px 22px;
+
+        border-radius:22px;
+    }
+
+
+    .loginCard h2{
+
+        font-size:24px;
+    }
+
+
+    .loginCard img{
+
+        width:75px;
+        height:75px;
+    }
 
 }
 
-.app{
-
-display:block;
-
-height:auto;
-
-}
-
-.sidebar{
-
-display:none;
-
-}
-
-.chatSection{
-
-width:100%;
-
-height:100vh;
-
-}
-
-.chatHeader{
-
-padding:15px;
-
-}
-
-.headerLogo{
-
-width:48px;
-
-height:48px;
-
-}
-
-.headerLeft h2{
-
-font-size:18px;
-
-}
-
-.headerLeft p{
-
-font-size:13px;
-
-}
-
-.statusRow{
-
-display:none;
-
-}
-
-.endChat{
-
-padding:10px 14px;
-
-font-size:13px;
-
-}
-
-.avatar{
-
-width:44px;
-
-height:44px;
-
-font-size:18px;
-
-}
-
-.welcomeCard{
-
-flex-direction:column;
-
-text-align:center;
-
-padding:20px;
-
-margin:15px;
-
-}
-
-.welcomeCard img{
-
-width:70px;
-
-height:70px;
-
-}
-
-.welcomeCard h2{
-
-font-size:22px;
-
-}
-
-.welcomeCard p{
-
-font-size:14px;
-
-}
-
-#chat{
-
-padding:15px;
-
-}
-
-.ai{
-
-max-width:100%;
-
-padding:18px;
-
-}
-
-.user{
-
-max-width:90%;
-
-padding:18px;
-
-}
-
-.inputArea{
-
-padding:12px;
-
-gap:10px;
-
-}
-
-#msg{
-
-height:52px;
-
-font-size:14px;
-
-}
-
-.voiceBtn,
-.attach,
-.sendBtn{
-
-width:46px;
-
-height:46px;
-
-border-radius:14px;
-
-}
-
-.suggestions{
-
-padding:12px;
-
-}
-
-.suggestions button{
-
-font-size:13px;
-
-padding:10px 14px;
-
-}
-
-.loginCard{
-
-padding:30px 22px;
-
-border-radius:22px;
-
-}
-
-.loginCard h2{
-
-font-size:24px;
-
-}
-
-.loginCard img{
-
-width:75px;
-
-height:75px;
-
-}
-
+/* ===================================
+   MOBILE TOP LOGO
+   Hidden on Desktop
+=================================== */
+
+.mobileTopLogo{
+    display:none;
 }
 
 /* ==========================
